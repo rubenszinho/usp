@@ -1,0 +1,1 @@
+char* troqueStr(const char* s, const char* strIncorreta, const char* strCorreta);
