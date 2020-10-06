@@ -1,4 +1,4 @@
-#define TamFila 10
+#define TamFila 1000
 
 typedef struct fila fila_t;
 
