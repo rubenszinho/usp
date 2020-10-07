@@ -6,25 +6,26 @@ int insercao(int *vet);
 int tam;
 
 int main(){
-    int numeroDigitado, tam, *vet = (int*) malloc (sizeof(vet));
+    int numeroDigitado, *vet = (int*) malloc (sizeof(int));
     scanf("%d", &numeroDigitado);
     for (tam = 0; numeroDigitado > 0; tam ++){
-        int *vet = (int*) realloc (vet, sizeof(vet));
+        vet = (int*) realloc (vet, sizeof(int)*(tam +  1));
         vet[tam] = numeroDigitado;
         scanf("%d", &numeroDigitado);
     }
+	tam--;
     insercao(vet);
-    printf("%d %d", vet[0], vet[tam]);
+    printf("%d\n%d\n", vet[tam], vet[0]);
     return 0;
 }
 
 int insercao(int *vet){
     int i, j, x;
-    for (i = 0; i < tam; i++){
+    for (i = 0; i < tam+1; i++){
         x = vet[i];
         j = i - 1;
         vet[i] = x;
-        while (x < vet[j]){
+        while (j > 0 && x < vet[j]){
             vet[j + 1] = vet[j];
             j--;
         }
