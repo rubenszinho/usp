@@ -4,3 +4,19 @@
 //repetição) e escreva "SIM", caso seja um número perfeito. Caso contrário, 
 //escreva "NAO".
 //Exemplo de número perfeito: 6 = 1 + 2 + 3
+
+#include <stdio.h> 
+    int main(){
+        int n, x = 0, i;
+        scanf("%d", &n);
+        for(i = 1; i < n; i ++){
+            if(n % i == 0)
+                x += i;
+            if(x == n){
+                printf("SIM");
+                return 0;
+                }               
+        }
+        printf("NAO");
+        return 0;
+    }
