@@ -1,29 +1,24 @@
+// Faça um programa que leia vários números inteiros positivos e imprima o maior e menor número (um em cada linha). O programa é encerrado se for informado um número zero ou negativo.
 
 #include <stdio.h>
 #include <stdlib.h>
+int insercao(int *vet);
 int tam;
 
-int insercao(int vet[]);
 int main(){
-    int numeroDigitado, vetor[];
-
-    for (tam = 0;; tam++){
+    int numeroDigitado, tam, *vet = (int*) malloc (sizeof(vet));
+    scanf("%d", &numeroDigitado);
+    for (tam = 0; numeroDigitado > 0; tam ++){
+        int *vet = (int*) realloc (vet, sizeof(vet));
+        vet[tam] = numeroDigitado;
         scanf("%d", &numeroDigitado);
-        if(numeroDigitado == 0 || numeroDigitado < 0)
-            break;
-        vetor[i] = numeroDigitado;
     }
-
-    insercao(vetor);
-
-    for (int j = 0; j < tam; j++){
-        printf( "%d ", vetor[j]);
-    }
-
+    insercao(vet);
+    printf("%d %d", vet[0], vet[tam]);
     return 0;
 }
 
-int insercao(int vet[]){
+int insercao(int *vet){
     int i, j, x;
     for (i = 0; i < tam; i++){
         x = vet[i];
@@ -37,3 +32,6 @@ int insercao(int vet[]){
     }
     return 0;
 }
+
+
+
