@@ -21,7 +21,7 @@ int main(){
 
 int insercao(int *vet){
     int i, j, x;
-    for (i = 0; i < tam+1; i++){
+    for (i = 0; i < tam; i++){
         x = vet[i];
         j = i - 1;
         vet[i] = x;
@@ -33,6 +33,3 @@ int insercao(int *vet){
     }
     return 0;
 }
-
-
-
