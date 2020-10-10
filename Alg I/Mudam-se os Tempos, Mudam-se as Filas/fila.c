@@ -5,7 +5,7 @@
 
 struct fila {
 	int inicio, fim, total;
-	void *itens[TamFila];
+	elem itens[TamFila];
 };
 
 fila_t *criar() {
@@ -32,7 +32,7 @@ int isFull(fila_t *f) {
 	return 0;
 }
 
-int inserir(fila_t *f, void *x) {
+int inserir(fila_t *f, elem x) {
 	if(isFull(f) == 1)
 		return 0;
 
@@ -42,7 +42,7 @@ int inserir(fila_t *f, void *x) {
 	return 1;
 }
 
-int remover(fila_t *f, void **x) {
+int remover(fila_t *f, elem *x) {
 	if(isEmpty(f) == 1)
 		return 0;
 
