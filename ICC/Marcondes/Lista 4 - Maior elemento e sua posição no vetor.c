@@ -2,21 +2,30 @@
 //definidos pelo usuário. Imprima o maior valor e a posição do maior valor 
 //no vetor, um em cada linha.
 #include <stdio.h>
+#include <stdlib.h>
+
 #define TAM 5
 
 int main(){
-    float numeroDigitado, vet[tam], aux;
-    int i, j;
-    scanf("%d", &numeroDigitado);
-    for (i = 0; numeroDigitado < TAM; i ++){
+    float* vet = (float*) calloc(TAM, sizeof(float));
+    float numeroDigitado;
+    int pos = 0;
+    for (int i = 0; i < TAM; i ++){
+        scanf("%f", &numeroDigitado);
         vet[i] = numeroDigitado;
-        if(vet[i] > vet[i + 1] && vet[i + 1] < tam )
-            vet[i]
-        scanf("%d", &numeroDigitado);
     }
-    
-        printf("%f\n%d", vet[tam], );
+    float aux = vet[0];
+    for (int i = 0; i < TAM; i ++){
+        if (aux < vet[i+1]){
+            if(i + 1 == 5)
+                break;
+            aux = vet[i+1];
+            pos = i+1;
+        }
     }
-
+    printf("%.1f\n%d", aux, pos);
     return 0;
 }
+
+
+

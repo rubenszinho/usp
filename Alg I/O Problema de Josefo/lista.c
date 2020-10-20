@@ -1,58 +1,83 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include "fila.h"
-
-struct fila {
-	int inicio, fim, total;
-	elem itens[TamFila];
+#include "lista.h"
+typedef struct no NO;
+struct no 
+{
+	elem info;
+	NO *prox;
 };
 
-fila_t *criar() {
-	fila_t *f;
-	f = (fila_t *)malloc(sizeof(fila_t));
-	assert(f != NULL);
-	f->total = 0;
-	f->inicio = 0;
-	f->fim = 0;
-	return f;
+struct lista 
+{
+	NO *atual;
+	int tam;
+};
+
+LISTA* cria()
+{
+	LISTA *l = (LISTA *)malloc(sizeof(LISTA));
+	assert(l != NULL);
+	l -> atual = NULL;
+	l -> tam = 0;
+
+	return l;
 }
 
-int isEmpty(fila_t *f) {
-	assert(f != NULL);
-	if(f->total == 0)
-		return 1;
-	return 0;
+elem josefo(LISTA *l, int k)
+{
+	assert(l != NULL);
+	assert(l->atual != NULL);
+	NO *ant;
+	while(l->tam > 1)
+	{
+		for(int i = 0; i < k; i++)
+		{
+			ant = l->atual;
+			l->atual = l->atual->prox;
+		}
+	remover(l, ant);
+	}
+	return l->atual->prox->info;
 }
 
-int isFull(fila_t *f) {
-	assert(f != NULL);
-	if(f->total == TamFila)
-		return 1;
-	return 0;
-}
-
-int inserir(fila_t *f, elem x) {
-	if(isFull(f) == 1)
-		return 0;
-
-	f->itens[f->fim] = x;
-	f->fim = (f->fim + 1) % TamFila;
-	f->total++;
+int insere (LISTA *l, elem x)
+{
+	assert(l != NULL);
+	if(busca(l, x) == 1) return 0;
+	NO *p = (NO *)malloc(sizeof(NO));
+	p->info = x;
+	if(l->atual == NULL)
+		p->prox = p;
+	else
+	{
+		p->prox = l->atual->prox;
+		l->atual->prox = p;
+	}
+	l->atual = p;
+	l->tam ++;
 	return 1;
 }
 
-int remover(fila_t *f, elem *x) {
-	if(isEmpty(f) == 1)
-		return 0;
-
-	*x = f->itens[f->inicio];
-	f->inicio = (f->inicio + 1) % TamFila;
-	f->total--;
+int busca(LISTA *l, elem x)
+{
+	assert(l != NULL);
+	NO *p;
+	if(l->atual == NULL) return 0;
+	p = l->atual;
+	do{
+		if(p->info == x) return 1;
+		p = p->prox;
+	} while(p != l->atual);
 	return 0;
 }
 
-void destruir(fila_t *f) {
-	if(f != NULL)
-		free(f);
+void remover(LISTA *l, NO *ant)
+{
+	assert(l != NULL);
+	ant->prox = l->atual->prox;
+	free(l->atual);
+	l->atual = ant;
+	l->tam--;
 }
