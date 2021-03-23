@@ -1,14 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int main() {
-    FILE *arq;
-    arq = fopen("arquivo.txt", "w+");
+int main(){
+    FILE *arq1;
+    FILE *arq2;
+    char c;
 
-    if(arq=NULL){
-        printf("Erro ao abrir o arquivo!");
-        exit(1);
-    }
+    arq1 = fopen("arquivo.txt", "r");
+    arq2 = fopen("arquivo2.txt", "w");
 
-    fprintf(arq, "COMPUTADOR");
+        fscanf(arq1, "%c", &c);
+        fprintf(arq2, "%c", c);
+        
+    fclose(arq1);
+    fclose(arq2);
+
+    return 0;
 }
